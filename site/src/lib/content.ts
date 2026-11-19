@@ -16,3 +16,8 @@ export function getSections(page: string) {
 export function getProducts() {
   return db.select().from(products).where(eq(products.published, true)).orderBy(asc(products.sortOrder)).all();
 }
+
+export function getProduct(slug: string) {
+  return db.select().from(products).where(eq(products.slug, slug)).get();
+}
+export const CATEGORIES: Record<string, string> = { nutrient: "محلول غذایی بهرست", micro: "ریزمغذی", npk: "کود NPK" };

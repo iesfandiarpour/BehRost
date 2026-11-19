@@ -95,7 +95,7 @@ export default function Home() {
             <p className="sub">محلول‌های غذایی بهرست و کودهای NPK پیوند گستر پارسان</p>
             <div className="pgrid">
               {items.map((p) => (
-                <Link key={p.id} className="pc" href="/#shop">
+                <Link key={p.id} className="pc" href={`/shop/${p.slug}`}>
                   <div className="im">{p.image && <img src={p.image} alt={p.name} />}</div>
                   <div className="b">
                     <h3>{p.name}</h3>
@@ -107,6 +107,7 @@ export default function Home() {
                 </Link>
               ))}
             </div>
+            <p style={{ marginTop: 20 }}><Link className="btn s" href="/shop">مشاهده‌ی همه‌ی محصولات</Link></p>
           </div>
         </section>
       </main>

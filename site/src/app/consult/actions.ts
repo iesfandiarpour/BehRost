@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { z } from "zod";
 import { db, messages } from "@/db";
 
-export type ConsultState = { ok: boolean; error?: string; fields?: Record<string, string> };
+export type ConsultState = { ok: boolean; error?: string; fields?: Record<string, string>; values?: Record<string, string> };
 
 const FAD = "۰۱۲۳۴۵۶۷۸۹";
 const digits = (s: string) => s.replace(/[۰-۹]/g, (d) => String(FAD.indexOf(d))).replace(/\s|-/g, "");
@@ -24,17 +24,18 @@ const hits = new Map<string, number[]>();
 
 export async function submitConsult(_prev: ConsultState, fd: FormData): Promise<ConsultState> {
   if (fd.get("website")) return { ok: true }; // honeypot: ربات‌ها
+  const values = Object.fromEntries([...fd.entries()].filter(([k, v]) => typeof v === "string" && k !== "website")) as Record<string, string>;
   const h = await headers();
   const ip = h.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
   const now = Date.now();
   const recent = (hits.get(ip) ?? []).filter((t) => now - t < 3600_000);
-  if (recent.length >= 5) return { ok: false, error: "تعداد درخواست‌ها زیاد است؛ کمی بعد دوباره تلاش کنید." };
+  if (recent.length >= 5) return { ok: false, values, error: "تعداد درخواست‌ها زیاد است؛ کمی بعد دوباره تلاش کنید." };
 
   const parsed = schema.safeParse(Object.fromEntries(fd));
   if (!parsed.success) {
     const fields: Record<string, string> = {};
     for (const i of parsed.error.issues) fields[String(i.path[0])] = i.message;
-    return { ok: false, error: "لطفاً موارد مشخص‌شده را اصلاح کنید.", fields };
+    return { ok: false, values, error: "لطفاً موارد مشخص‌شده را اصلاح کنید.", fields };
   }
   const { name, phone, note, ...rest } = parsed.data;
   db.insert(messages).values({ kind: "consult", name, phone, body: note ?? "", payload: rest }).run();

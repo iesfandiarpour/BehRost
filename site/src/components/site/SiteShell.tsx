@@ -4,6 +4,8 @@ import "../../app/site.css";
 import { getSetting, type Brand, type Contact } from "@/lib/content";
 import { landline, mobile, toFa } from "@/lib/format";
 import FitocodeCredit from "./FitocodeCredit";
+import { CartProvider } from "@/components/shop/CartContext";
+import CartLink from "@/components/shop/CartLink";
 
 // شماره‌ها چپ‌به‌راست و بدون به‌هم‌ریختگی در متن راست‌چین نمایش داده می‌شوند
 const numbers = (list: string[]) =>
@@ -18,7 +20,7 @@ const NAV = [
   ["خانه", "/"],
   ["مشاوره", "/consult"],
   ["ابزارها", "/tools"],
-  ["فروشگاه", "/#shop"],
+  ["فروشگاه", "/shop"],
   ["تماس", "/#contact"],
 ];
 
@@ -27,7 +29,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   const contact = getSetting<Contact>("contact");
   const social = getSetting<{ instagram: string }>("social");
   return (
-    <>
+    <CartProvider>
       <header>
         <div className="wrap">
           <Link className="chip" href="/">
@@ -38,6 +40,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
               <Link key={href} href={href}>{label}</Link>
             ))}
           </nav>
+          <CartLink />
         </div>
       </header>
       {children}
@@ -61,6 +64,6 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
         </div>
         <FitocodeCredit />
       </footer>
-    </>
+    </CartProvider>
   );
 }
