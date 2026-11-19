@@ -1,0 +1,23 @@
+# راه‌اندازی خودکار روی Render (پلن رایگان)
+services:
+  - type: web
+    name: behrost
+    runtime: node
+    plan: free
+    rootDir: site
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start:render
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: DATABASE_URL
+        value: file:./data/app.db
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: INITIAL_ADMIN_PASSWORD
+        generateValue: true
+      - key: PAYMENT_MODE
+        value: sandbox
