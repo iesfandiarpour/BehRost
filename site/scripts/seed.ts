@@ -107,7 +107,7 @@ async function main() {
       type: "tools",
       order: 3,
       data: {
-        title: "ابزارهای رایگان بهرست",
+        title: "ابزارهای رایگان",
         items: [
           { slug: "soil-water-interpretation", title: "تفسیر آزمایش خاک و آب", icon: "flask" },
           { slug: "nutrient-solution", title: "محاسبه‌گر محلول غذایی (EC، pH، استوک A/B)", icon: "droplets" },

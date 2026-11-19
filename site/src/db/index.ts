@@ -7,7 +7,7 @@ const file = process.env.DATABASE_URL?.replace(/^file:/, "") ?? "./data/app.db";
 
 // در حالت توسعه، اتصال بین رفرش‌ها نگه داشته می‌شود
 const g = globalThis as unknown as { __sqlite?: Database.Database };
-const sqlite = g.__sqlite ?? new Database(path.resolve(process.cwd(), file));
+const sqlite = g.__sqlite ?? new Database(path.resolve(/*turbopackIgnore: true*/ process.cwd(), file));
 sqlite.pragma("journal_mode = WAL");
 sqlite.pragma("foreign_keys = ON");
 if (process.env.NODE_ENV !== "production") g.__sqlite = sqlite;
