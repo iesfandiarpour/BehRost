@@ -49,3 +49,9 @@
 ## سرویس‌ها
 - پرداخت: درگاه آنلاین لازم است؛ فعلاً حالت آزمایشی (sandbox)، درگاه واقعی بعداً.
 - پیامک، اینماد، نقشه: هنوز تعیین نشده.
+
+## پنل مدیریت
+- مسیر `/admin`؛ همه‌ی کلاس‌های CSS پنل پیشوند `ad-` دارند (`site/src/app/admin/admin.css`). هر action مدیریت باید با `requireAdmin()` شروع شود.
+- محتوای صفحه‌ی اول در جدول `sections`، تنظیمات در `site_settings`، سئو در `page_seo`. بعد از هر ذخیره `revalidatePath("/", "layout")`.
+- عکس‌های آپلودی در `site/uploads/` و با مسیر `/media/...` سرو می‌شوند.
+- فرم‌ها (Server Actions) پشت پراکسی Codespaces/Render فقط با `allowedOrigins` در `site/next.config.ts` کار می‌کنند. برای دامنه‌ی اختصاصی، متغیر `ALLOWED_ORIGINS` را تنظیم کن (مثلاً `behrost.ir,www.behrost.ir`).

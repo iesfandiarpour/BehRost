@@ -1,11 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
+import { eq } from "drizzle-orm";
+import { db, pageSeo } from "@/db";
 import SiteShell from "@/components/site/SiteShell";
 import StepsGrid from "@/components/site/StepsGrid";
 import { getProducts, getSections, getSetting, type Brand } from "@/lib/content";
 import { toman } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata() {
+  const seo = db.select().from(pageSeo).where(eq(pageSeo.path, "/")).get();
+  return { title: seo?.title ?? undefined, description: seo?.description ?? undefined };
+}
 
 const ICONS: Record<string, string> = {
   flask: "🧪", droplets: "💧", map: "🗺️", thermometer: "🌡️", repeat: "🔁", leaf: "🍃", sprout: "🌱",
