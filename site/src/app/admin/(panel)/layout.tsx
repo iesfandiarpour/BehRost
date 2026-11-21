@@ -17,6 +17,7 @@ export default async function Panel({ children }: { children: React.ReactNode })
         <Link href="/admin/products">محصولات</Link>
         <Link href="/admin/orders">سفارش‌ها{paid > 0 && <span className="ad-badge">{toFa(paid)}</span>}</Link>
         <Link href="/admin/messages">پیام‌ها{unread > 0 && <span className="ad-badge">{toFa(unread)}</span>}</Link>
+        <Link href="/admin/posts">مقاله‌های بلاگ</Link>
         <Link href="/admin/content">متن صفحه‌ی اول و سئو</Link>
         <Link href="/admin/settings">اطلاعات تماس و تنظیمات</Link>
         <Link href="/admin/account">رمز عبور</Link>

@@ -4,8 +4,8 @@ import { eq } from "drizzle-orm";
 import { db, pageSeo } from "@/db";
 import SiteShell from "@/components/site/SiteShell";
 import StepsGrid from "@/components/site/StepsGrid";
-import { getProducts, getSections, getSetting, type Brand } from "@/lib/content";
-import { toman } from "@/lib/format";
+import { getPosts, getProducts, getSections, getSetting, type Brand } from "@/lib/content";
+import { jday, toman } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
@@ -36,6 +36,7 @@ export default function Home() {
   const steps = by<Steps>("steps");
   const tools = by<Tools>("tools");
   const items = getProducts();
+  const latest = getPosts(3);
 
   return (
     <SiteShell>
@@ -117,6 +118,24 @@ export default function Home() {
             <p style={{ marginTop: 20 }}><Link className="btn s" href="/shop">مشاهده‌ی همه‌ی محصولات</Link></p>
           </div>
         </section>
+
+        {latest.length > 0 && (
+          <section id="blog">
+            <div className="wrap">
+              <h2>آخرین مقاله‌ها</h2>
+              <p className="sub">نکته‌های آموزشی تغذیه‌ی گیاه از کارشناسان پیوند گستر پارسان</p>
+              <div className="pgrid">
+                {latest.map((p) => (
+                  <Link key={p.id} className="pc" href={`/blog/${p.slug}`}>
+                    {p.cover && <div className="im" style={{ aspectRatio: "16/10" }}><img src={p.cover} alt={p.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} /></div>}
+                    <div className="b"><small className="cat">{p.publishedAt ? jday(p.publishedAt) : ""}</small><h3>{p.title}</h3></div>
+                  </Link>
+                ))}
+              </div>
+              <p style={{ marginTop: 20 }}><Link className="btn s" href="/blog">همه‌ی مقاله‌ها</Link></p>
+            </div>
+          </section>
+        )}
       </main>
     </SiteShell>
   );

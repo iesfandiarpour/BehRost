@@ -13,3 +13,5 @@ export const intFrom = (v: FormDataEntryValue | null) => {
   const t = String(v ?? "").replace(/[۰-۹]/g, (d) => String("۰۱۲۳۴۵۶۷۸۹".indexOf(d))).replace(/[\s٬,،]/g, "");
   return /^\d+$/.test(t) ? Number(t) : NaN;
 };
+/** فقط تاریخ شمسی، مثل ۱۴۰۵/۰۸/۲۸ */
+export const jday = (sec: number) => toFa(jformat(new Date(sec * 1000), "yyyy/MM/dd"));

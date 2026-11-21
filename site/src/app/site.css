@@ -156,3 +156,12 @@ footer p{margin:2px 0;font-size:.95rem}
 .narrow{max-width:640px}
 .cartsplit{grid-template-columns:1.5fr 1fr}
 @media (max-width:860px){.cartsplit{grid-template-columns:1fr}.cartlist li{grid-template-columns:64px 1fr}.cartlist .sum{grid-column:2}}
+
+/* ---------- بلاگ ---------- */
+.narrow2{max-width:780px}
+.postcover{width:100%;border-radius:18px;margin:12px 0 20px;max-height:420px;object-fit:cover}
+.prose{font-size:1.05rem;line-height:2.1}
+.prose h2{font-size:1.5rem;margin:1.6em 0 .4em;font-weight:900}
+.prose h3{font-size:1.2rem;margin:1.3em 0 .3em;font-weight:800}
+.prose ul{padding-inline-start:1.4em}
+.prose a{color:var(--brand);text-decoration:underline}

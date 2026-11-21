@@ -21,3 +21,12 @@ export function getProduct(slug: string) {
   return db.select().from(products).where(eq(products.slug, slug)).get();
 }
 export const CATEGORIES: Record<string, string> = { nutrient: "محلول غذایی بهرست", micro: "ریزمغذی", npk: "کود NPK" };
+
+import { desc } from "drizzle-orm";
+import { posts } from "@/db";
+export function getPosts(limit = 100) {
+  return db.select().from(posts).where(eq(posts.published, true)).orderBy(desc(posts.publishedAt)).limit(limit).all();
+}
+export function getPost(slug: string) {
+  return db.select().from(posts).where(eq(posts.slug, slug)).get();
+}
