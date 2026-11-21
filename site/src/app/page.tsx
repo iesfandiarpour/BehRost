@@ -126,7 +126,7 @@ export default function Home() {
               <p className="sub">نکته‌های آموزشی تغذیه‌ی گیاه از کارشناسان پیوند گستر پارسان</p>
               <div className="pgrid">
                 {latest.map((p) => (
-                  <Link key={p.id} className="pc" href={`/blog/${p.slug}`}>
+                  <Link key={p.id} className="pc blogcard" href={`/blog/${p.slug}`}>
                     {p.cover && <div className="im" style={{ aspectRatio: "16/10" }}><img src={p.cover} alt={p.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} /></div>}
                     <div className="b"><small className="cat">{p.publishedAt ? jday(p.publishedAt) : ""}</small><h3>{p.title}</h3></div>
                   </Link>

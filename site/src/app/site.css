@@ -165,3 +165,13 @@ footer p{margin:2px 0;font-size:.95rem}
 .prose h3{font-size:1.2rem;margin:1.3em 0 .3em;font-weight:800}
 .prose ul{padding-inline-start:1.4em}
 .prose a{color:var(--brand);text-decoration:underline}
+
+/* رنگ‌ها و چیدمان متن مقاله‌ها
+   عنوان مقاله: سبز یشمی | سرتیتر (##): سبز تیره | زیرتیتر (###): آبی روشن | متن: تراز دو طرف */
+:root{--jade:#009b66;--post-h2:#0b5a2e;--post-h3:#2e93d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--jade:#2fd49a;--post-h2:#56c987;--post-h3:#6ab8f0}}
+:root[data-theme="dark"]{--jade:#2fd49a;--post-h2:#56c987;--post-h3:#6ab8f0}
+.posttitle,.blogcard h3{color:var(--jade)}
+.prose h2{color:var(--post-h2)}
+.prose h3{color:var(--post-h3)}
+.prose p,.prose li,.pexcerpt{text-align:justify;text-justify:inter-word}

@@ -21,7 +21,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
     <SiteShell>
       <main className="page"><div className="wrap narrow2">
         <nav className="crumb"><Link href="/">خانه</Link> / <Link href="/blog">بلاگ</Link></nav>
-        <h1 className="ph1">{p.title}</h1>
+        <h1 className="ph1 posttitle">{p.title}</h1>
         {p.publishedAt && <p className="sub">{jday(p.publishedAt)}</p>}
         {p.cover && <img className="postcover" src={p.cover} alt={p.title} />}
         <article className="prose">{renderContent(p.content)}</article>
